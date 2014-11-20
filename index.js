@@ -18,9 +18,9 @@ var req_ob = {
 var my_callback_function = function (request, response) {
 //    console.log(request);
 //    console.log(response);
-    http.request("http://api.soundcloud.com/tracks.json?consumer_key=apigee&filter=all&order=created_at&p=Let it be", function (res) {
+    http.get("http://api.soundcloud.com/tracks.json?consumer_key=apigee&filter=all&order=created_at&p=Let it be", function (res) {
 //       console.log(res);
-    var str = "";
+        var str = "";
 
         res.on('data', function (piece) {
 //            response.write(piece);
@@ -34,7 +34,7 @@ var my_callback_function = function (request, response) {
 
         res.on('end', function () {
             console.log("before in finish\n");
-            response.end();
+            // response.end();
             response.send(str);
             console.log("after in finish\n");
 
@@ -60,11 +60,6 @@ var new_callback_function = function (request, response) {
     })
 }
 
-//app.use('/', my_callback_function);
-
-app.use('/', function (request, response)
-{
-    http.get()
-})
+app.use('/', my_callback_function);
 
 app.listen(8000);
